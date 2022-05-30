@@ -1,18 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const Sequelize = require("sequelize");
 require("dotenv").config();
 let sequelize;
 if (process.env.JAWDB_URL) {
-    sequelize = new Sequelize(process.env.JAWSDB_URL);
-}
-else {
-    sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
-        host: "localhost",
-        dialect: "mysql",
-        dialectOptions: {
-            decimalNumbers: true,
-        },
-    });
+  sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS,
+    {
+      host: "localhost",
+      dialect: "mysql",
+      dialectOptions: {
+        decimalNumbers: true,
+      },
+    }
+  );
 }
 module.exports = sequelize;

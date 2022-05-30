@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/CarlJMcGee/Carls-Tech-Blog#readme",
   "dependencies": {
+    "@types/sequelize": "^4.28.13",
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.4",
     "dotenv": "^16.0.1",
