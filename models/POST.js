@@ -16,10 +16,10 @@ Post.init(
       allowNull: false,
     },
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        len: [1],
+        len: [1, 500],
       },
     },
     user_id: {
@@ -32,6 +32,7 @@ Post.init(
   },
   {
     sequelize,
+    timestamps: false,
     freezeTableName: true,
     modelName: "post",
     underscored: true,
