@@ -7,4 +7,22 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
+// get all user posts
+router.get("/posts", async (req, res) => {
+  const users = await User.findAll({
+    include: [
+      {
+        model: Post,
+        attributes: {
+          exclude: ["user_id"],
+        },
+      },
+    ],
+    attributes: {
+      exclude: ["password"],
+    },
+  });
+  res.json(users);
+});
+
 module.exports = router;
