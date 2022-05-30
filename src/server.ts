@@ -1,5 +1,5 @@
 const express = require("express");
-// const sequelize = require("./config/connection");
+const sequelize = require("./config/connection");
 const path = require("path");
 const exprsHand = require("express-handlebars");
 const { urlencoded } = require("express");
@@ -15,7 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.send(`Server test successful.`);
+  res.send(`Fuck yo couch`);
 });
-
-app.listen(PORT, () => console.log(`Now listening on PORT: ${PORT}`));
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`Now listening on PORT: ${PORT}`));
+});
