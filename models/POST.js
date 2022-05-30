@@ -12,7 +12,7 @@ Post.init(
       primaryKey: true,
     },
     title: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     content: {
