@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "watch": true,
+    "target": "ES2022",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "outDir": "./"
+  },
+  "exclude": ["node_modules"]
+}
