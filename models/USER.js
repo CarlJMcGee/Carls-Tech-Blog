@@ -16,6 +16,7 @@ User.init(
     },
     username: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
     email: {
@@ -37,8 +38,18 @@ User.init(
   {
     hooks: {
       beforeCreate: async (newUserData) => {
+        console.log(newUserData);
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
+      },
+
+      beforeBulkUpdate: async (updatedUserData) => {
+        console.log(updatedUserData);
+        updatedUserData.attributes.password = await bcrypt.hash(
+          updatedUserData.attributes.password,
+          10
+        );
+        return updatedUserData;
       },
 
       async beforeUpdate(updatedUserData) {
