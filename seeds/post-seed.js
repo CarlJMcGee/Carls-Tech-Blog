@@ -58,5 +58,4 @@ const PostList = [
 ];
 
 const seedPosts = () => Post.bulkCreate(PostList);
-
 module.exports = seedPosts;
