@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
     include: [
       {
         model: User,
+        as: "OP",
         attributes: {
           exclude: ["password"],
         },
@@ -28,6 +29,13 @@ router.get("/comments", async (req, res) => {
         attributes: {
           exclude: ["user_id", "post_id"],
         },
+        include: {
+          model: User,
+          as: "commenter",
+          attributes: {
+            exclude: ["password"],
+          },
+        },
       },
     ],
   });
@@ -36,21 +44,32 @@ router.get("/comments", async (req, res) => {
 
 // get post from id
 router.get("/find/:id", async (req, res) => {
-  const post = await Post.findByPk(req.params.id);
-  res.json(post);
-});
-
-// get post's comments from id
-router.get("/find/:id/comments", async (req, res) => {
   const post = await Post.findByPk(req.params.id, {
     include: [
       {
+        model: User,
+        as: "OP",
+        attributes: {
+          exclude: ["password"],
+        },
+      },
+      {
         model: Comment,
+        include: {
+          model: User,
+          as: "commenter",
+          attributes: {
+            exclude: ["password"],
+          },
+        },
         attributes: {
           exclude: ["user_id", "post_id"],
         },
       },
     ],
+    attributes: {
+      exclude: ["user_id"],
+    },
   });
   res.json(post);
 });

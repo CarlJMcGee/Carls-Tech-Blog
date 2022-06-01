@@ -130,6 +130,14 @@ router.delete("/:id", async (req, res) => {
       },
     }
   );
+  const userComments = await Comment.update(
+    { user_id: 999999 },
+    {
+      where: {
+        user_id: null,
+      },
+    }
+  );
   res.status(202).send(`User #${user.id}: ${user.username} deleted`);
 });
 
