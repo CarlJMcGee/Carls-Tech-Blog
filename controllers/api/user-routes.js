@@ -93,7 +93,7 @@ router.post("/", async (req, res) => {
       username: req.body.username,
     },
   });
-  res.status(201).send(`User #${userID.id} ${req.body.username} created.`);
+  res.status(201).send(`User #${userID.id}: ${req.body.username} created.`);
 });
 
 router.put("/:id", async (req, res) => {
@@ -107,7 +107,30 @@ router.put("/:id", async (req, res) => {
       id: req.params.id,
     },
   });
-  res.status(202).send(`User #${user.id}: ${user.username}`);
+  res.status(202).send(`User #${user.id}: ${user.username} updated`);
+});
+
+// delete user
+router.delete("/:id", async (req, res) => {
+  const user = await User.findByPk(req.params.id, {
+    attributes: {
+      exclude: ["password"],
+    },
+  });
+  const deletedUser = await User.destroy({
+    where: {
+      id: req.params.id,
+    },
+  });
+  const usersPosts = await Post.update(
+    { user_id: 999999 },
+    {
+      where: {
+        user_id: null,
+      },
+    }
+  );
+  res.status(202).send(`User #${user.id}: ${user.username} deleted`);
 });
 
 module.exports = router;

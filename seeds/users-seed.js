@@ -31,6 +31,12 @@ const UserList = [
     email: "joe@ma.ma",
     password: "deeznutzgotem",
   },
+  {
+    id: 999999,
+    username: "DELETED",
+    email: "N_A@DELETED.DELETED",
+    password: "passpasspass",
+  },
 ];
 
 const seedUsers = () =>
