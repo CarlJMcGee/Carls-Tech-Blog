@@ -4,12 +4,19 @@ const sequelize = require("./config/connection");
 const path = require("path");
 const exprsHand = require("express-handlebars");
 const { urlencoded } = require("express");
-const { route } = require("./controllers");
+const session = require("express-session");
 
 const hbs = exprsHand.create({});
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(
+  session({
+    secret: "Jotaro is best JoJo",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 

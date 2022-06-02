@@ -141,4 +141,31 @@ router.delete("/:id", async (req, res) => {
   res.status(202).send(`User #${user.id}: ${user.username} deleted`);
 });
 
+// login
+router.post("/login", async (req, res) => {
+  try {
+    const dbUserData = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+
+    if (!dbUserData) {
+      res.status(400).json({ message: "Incorrect email or password." });
+      return;
+    }
+    req.session.regenerate((err) => {
+      req.session.loggedIn = true;
+      req.session.userId = dbUserData.id;
+
+      req.session.save(() => {
+        res.status(200).send(`User ${dbUserData.username} is logged in`);
+      });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
