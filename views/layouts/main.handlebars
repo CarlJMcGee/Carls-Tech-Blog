@@ -1,0 +1,49 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carl's Tech Blog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body class="container">
+    <header class="container columns is-centered is-multiline has-text-left">
+      <h1 class="column is-full title mt-2 mb-0">Carl's Tech Blog</h1>
+      <h2 class="column is-full subtitle">Worst Opinions on the Internet</h2>
+    </header>
+    <nav
+      class="navbar container columns is-link is-centered is-full has-text-centered has-text-white"
+    >
+      <div class="navbar-menu">
+        <div class="navbar-start is-centered">
+          <a class="navbar-item column" href="/">Home</a>
+          <a class="navbar-item column" href="/dashboard">Dashboard</a>
+        </div>
+        <div class="navbar-end">
+          {{#if loggedIn}}
+            <a class="navbar-item column" href="/logout">Logout</a>
+          {{/if}}
+        </div>
+      </div>
+    </nav>
+
+    <main class="columns is-centered">
+      {{{body}}}
+    </main>
+
+    <footer class="footer columns is-cenetered has-text-centered">
+      <h3 class="column">CarlJMcGee ©2022</h3>
+    </footer>
+
+  </body>
+</html>

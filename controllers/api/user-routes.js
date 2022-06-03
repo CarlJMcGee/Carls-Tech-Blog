@@ -155,11 +155,10 @@ router.post("/login", async (req, res) => {
       return;
     }
     req.session.regenerate((err) => {
-      req.session.loggedIn = true;
-      req.session.userId = dbUserData.id;
-
       req.session.save(() => {
-        console.log(req.session);
+        req.session.loggedIn = true;
+        req.session.userId = dbUserData.id;
+
         res.status(200).send(`User ${dbUserData.username} is logged in`);
       });
     });

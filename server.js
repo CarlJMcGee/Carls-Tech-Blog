@@ -5,6 +5,7 @@ const path = require("path");
 const exprsHand = require("express-handlebars");
 const { urlencoded } = require("express");
 const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const { v4: uuid } = require("uuid");
 
 const hbs = exprsHand.create({});
@@ -21,6 +22,9 @@ app.use(
     cookie: {
       maxAge: minutes * 60000,
     },
+    store: new SequelizeStore({
+      db: sequelize,
+    }),
   })
 );
 app.engine("handlebars", hbs.engine);
@@ -30,11 +34,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.send(`<h1>Homepage</h1>`);
-});
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on PORT: ${PORT}`));
 });
+("");
