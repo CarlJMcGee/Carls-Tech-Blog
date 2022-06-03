@@ -5,16 +5,22 @@ const path = require("path");
 const exprsHand = require("express-handlebars");
 const { urlencoded } = require("express");
 const session = require("express-session");
+const { v4: uuid } = require("uuid");
 
 const hbs = exprsHand.create({});
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+let minutes = 60;
 app.use(
   session({
+    genid: () => uuid(),
     secret: "Jotaro is best JoJo",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: minutes * 60000,
+    },
   })
 );
 app.engine("handlebars", hbs.engine);
