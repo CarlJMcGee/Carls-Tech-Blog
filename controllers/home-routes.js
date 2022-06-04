@@ -1,6 +1,13 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
 
+router.use("/dashboard", async (req, res, next) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+  }
+  next();
+});
+
 router.get("/", async (req, res) => {
   const postData = await Post.findAll({
     include: [
@@ -42,6 +49,10 @@ router.get("/", async (req, res) => {
 
 router.get("/login", async (req, res) => {
   res.render("login");
+});
+
+router.get("/logout", (req, res) => {
+  res.redirect("/");
 });
 
 module.exports = router;

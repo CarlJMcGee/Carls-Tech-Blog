@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" class="has-background-link-light">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,29 +21,42 @@
       <h1 class="column is-full title mt-2 mb-0">Carl's Tech Blog</h1>
       <h2 class="column is-full subtitle">Worst Opinions on the Internet</h2>
     </header>
-    <nav
-      class="navbar container columns is-link is-centered is-full has-text-centered has-text-white"
-    >
-      <div class="navbar-menu">
-        <div class="navbar-start is-centered">
-          <a class="navbar-item column" href="/">Home</a>
-          <a class="navbar-item column" href="/dashboard">Dashboard</a>
-        </div>
-        <div class="navbar-end">
-          {{#if loggedIn}}
-            <a class="navbar-item column" href="/logout">Logout</a>
-          {{/if}}
+    <nav class="columns container">
+      <div
+        class="navbar column container columns is-three-quarters is-link has-text-white ml-1 pl-0 pr-3 py-0"
+      >
+        <div class="navbar-menu column columns">
+          <div class="navbar-start is-centered">
+            <a class="navbar-item column" href="/">Home</a>
+            <a class="navbar-item column" href="/dashboard">Dashboard</a>
+          </div>
+          <div class="navbar-end">
+            {{#if loggedIn}}
+              <a
+                class="navbar-item column logout-btn"
+                id="logout-btn"
+              >Logout</a>
+            {{else}}
+              <a href="/login" class="navbar-item column">Login</a>
+            {{/if}}
+          </div>
         </div>
       </div>
+      <div class="column"></div>
     </nav>
 
     <main class="columns is-centered">
       {{{body}}}
     </main>
 
-    <footer class="footer columns is-cenetered has-text-centered">
+    <footer
+      class="footer columns is-cenetered has-text-centered has-background-link-light"
+    >
       <h3 class="column">CarlJMcGee ©2022</h3>
     </footer>
 
+    {{#if loggedIn}}
+      <script src="./js/logout.js"></script>
+    {{/if}}
   </body>
 </html>

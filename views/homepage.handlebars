@@ -1,11 +1,20 @@
 {{! placeholder }}
 <div class="container column columns is-multiline is-centered">
   {{#each post}}
-    <div class="column columns is-full is-multiline">
-      <h3 class="column title is-full">{{title}}</h3>
-      <h3 class="column subtitle is-full">{{OP.username}}</h3>
-      <p class="column is-full">{{content}}</p>
-      <br />
+    <div
+      class="card column columns is-full is-multiline has-background-info my-3 has-text-white"
+    >
+      <div class="card-header columns is-multiline">
+        <h3
+          class="column card-title title is-full has-background-primary-light is-size-4 mb-4"
+        >{{title}}</h3>
+        <h3
+          class="column subtitle has-background-primary-light is-full pt-0"
+        >{{OP.username}}</h3>
+      </div>
+      <div class="card-content">
+        <p class="column is-full">{{content}}</p>
+      </div>
     </div>
   {{/each}}
 </div>
