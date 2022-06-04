@@ -1,0 +1,30 @@
+<div class="container column columns is-multiline">
+  <div class="column columns">
+    <button class="button column is-size-4"><span class="is-size-5">➕</span>
+      New Post</button>
+  </div>
+  <div class="column columns is-full is-multiline">
+    {{#each user.posts}}
+      <div class="container column">
+        <div class="card columns is-multiline has-background-info">
+          <div class="card-header column is-full has-background-primary-light">
+            <h3 class="title column">{{title}}</h3>
+          </div>
+          <div class="card-content column has-text-white">
+            <p class="column">{{content}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class="model">
+    <div class="model-background"></div>
+    <div class="model-card">
+      <header class="model-card-head">
+        <p class="model-card-title">New Post</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+    </div>
+    <button class="model-close is-large" aria-label="close"></button>
+  </div>
+</div>

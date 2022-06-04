@@ -39,11 +39,27 @@ router.get("/", async (req, res) => {
     return post.get({ plain: true });
   });
 
-  console.log(posts);
-
   res.render("homepage", {
     loggedIn: req.session.loggedIn,
     post: posts,
+  });
+});
+
+router.get("/dashboard", async (req, res) => {
+  const profileData = await User.findByPk(req.session.userId, {
+    include: {
+      model: Post,
+      attributes: {
+        exclude: ["user_id"],
+      },
+    },
+  });
+  const profile = profileData.get({ plain: true });
+
+  console.log(profile);
+  res.render("dashboard", {
+    loggedIn: req.session.loggedIn,
+    user: profile,
   });
 });
 
