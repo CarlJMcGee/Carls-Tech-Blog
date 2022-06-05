@@ -33,7 +33,8 @@ router.get("/", async (req, res) => {
         },
       },
     ],
-    limit: 3,
+    limit: 6,
+    order: [["id", "DESC"]],
   });
 
   const posts = postData.map((post) => {
