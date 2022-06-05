@@ -93,9 +93,43 @@ router.post("/", async (req, res) => {
       username: req.body.username,
     },
   });
-  res.status(201).send(`User #${userID.id}: ${req.body.username} created.`);
+
+  try {
+    const dbUserData = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+
+    if (!dbUserData) {
+      res.status(400).json({ message: "Incorrect email or password." });
+      return;
+    }
+
+    const auth = await dbUserData.checkPassword(req.body.password);
+
+    if (!auth) {
+      res.status(400).json({ message: "Incorrect email or password." });
+      return;
+    }
+
+    req.session.regenerate((err) => {
+      req.session.save(() => {
+        req.session.loggedIn = true;
+        req.session.userId = dbUserData.id;
+
+        res
+          .status(201)
+          .send(`User #${userID.id}: ${req.body.username} created.`);
+      });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
 });
 
+// update user info
 router.put("/:id", async (req, res) => {
   const userUpdate = await User.update(req.body, {
     where: {
