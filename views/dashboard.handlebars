@@ -1,8 +1,21 @@
 <div class="container column columns is-multiline">
-  <div class="column columns">
-    <button class="button column is-size-4"><span class="is-size-5">➕</span>
+
+  {{! username display/userId holder }}
+  <h2
+    class="column is-size-3 has-text-weight-bold"
+    data-user-id="{{user.id}}"
+    id="username"
+  >{{user.username}}</h2>
+
+  {{! new post button }}
+  <div class="column columns is-full">
+    <button class="button column is-size-4" id="new-post-btn"><span
+        class="is-size-5"
+      >➕</span>
       New Post</button>
   </div>
+
+  {{! posts }}
   <div class="column columns is-full is-multiline">
     {{#each user.posts}}
       <div class="container column">
@@ -17,14 +30,48 @@
       </div>
     {{/each}}
   </div>
-  <div class="model">
-    <div class="model-background"></div>
-    <div class="model-card">
-      <header class="model-card-head">
-        <p class="model-card-title">New Post</p>
-        <button class="delete" aria-label="close"></button>
+
+  {{! New Post Modal }}
+  <div class="modal" id="new-post-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">New Post</p>
+        <button class="close-modal delete" aria-label="close"></button>
       </header>
+
+      <form class="modal-card-body columns is-multiline" id="new-post-form">
+        <input
+          type="text"
+          placeholder="Title"
+          class="column is-full my-3"
+          id="new-post-title"
+        />
+        <textarea
+          name="new-post-content"
+          id="new-post-content"
+          cols="30"
+          rows="10"
+          class="column is-full my-3"
+          placeholder="Content Here..."
+        ></textarea>
+      </form>
+
+      <footer class="modal-card-foot columns is-multiline">
+        <button
+          type="submit"
+          form="new-post-form"
+          class="button is-info column py-1"
+          id="post-submit-btn"
+        >Post</button>
+        <button class="close-modal button column py-1">Cancel</button>
+      </footer>
     </div>
-    <button class="model-close is-large" aria-label="close"></button>
+    <button
+      class="modal-close close-modal is-large"
+      aria-label="close"
+    ></button>
   </div>
 </div>
+
+<script src="./js/dashboard.js"></script>
