@@ -1,17 +1,87 @@
 {{! login/signup page }}
-<div class="container columns ml-2">
-  <form action="" class="login-form column columns">
-    <label for="email-login" class="column">
-      Email
-      <input type="text" name="email-login" id="email-login" />
-    </label>
-    <label for="password-login" class="column">
-      Password
-      <input type="text" name="password-login" id="password-login" />
-    </label>
-    <input type="submit" value="Submit" id="login-submit" />
+<div class="container columns ml-2 is-centered is-vcentered">
+  {{! login }}
+  <form
+    action=""
+    class="login-form column columns is-multiline is-one-third mx-4"
+  >
+    <h3
+      class="column is-full has-text-centered is-underlined is-size-4 has-text-weight-bold"
+    >Login</h3>
+
+    <input
+      type="email"
+      name="email-login"
+      id="email-login"
+      placeholder="Email"
+      class="column is-full my-3"
+    />
+
+    <input
+      type="password"
+      name="password-login"
+      id="password-login"
+      placeholder="Password"
+      class="column is-full my-3"
+      autocomplete="off"
+    />
+
+    <input
+      type="submit"
+      value="Submit"
+      id="login-submit"
+      class="button column p-1 my-3"
+    />
   </form>
-  <form action="" class="column"></form>
+
+  {{! sign up }}
+  <form
+    action=""
+    class="column columns is-multiline is-centered is-one-third mx-4"
+  >
+    <h3
+      class="column is-full has-text-centered is-underlined is-size-4 has-text-weight-bold"
+    >Sign Up</h3>
+
+    <input
+      type="email"
+      name="email-signup"
+      id="email-signup"
+      placeholder="Email"
+      class="column is-full my-3"
+    />
+
+    <input
+      type="text"
+      name="username-signup"
+      id="username-signup"
+      placeholder="Username"
+      class="column is-full my-3"
+    />
+
+    <input
+      type="password"
+      name="pass-signup"
+      id="pass-signup"
+      placeholder="Password"
+      class="column is-full my-3"
+    />
+
+    <input
+      type="password"
+      name="pass-verf"
+      id="pass-verf"
+      placeholder="Re-enter"
+      class="column is-full my-3"
+    />
+
+    <input
+      type="submit"
+      value="Submit"
+      id="login-submit"
+      class="button column p-1 my-3"
+    />
+  </form>
 </div>
 
 <script src="./js/login.js"></script>

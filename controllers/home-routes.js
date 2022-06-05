@@ -4,6 +4,7 @@ const { User, Post, Comment } = require("../models");
 router.use("/dashboard", async (req, res, next) => {
   if (!req.session.loggedIn) {
     res.redirect("/login");
+    return;
   }
   next();
 });
