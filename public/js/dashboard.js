@@ -71,7 +71,6 @@ const toggleModal = function (modal) {
 
 const editPost = function (e) {
   e.preventDefault();
-  console.log(e.target.closest(".post").querySelector(".title").textContent);
 
   const title = e.target.closest(".post").querySelector(".title").textContent;
   const content = e.target

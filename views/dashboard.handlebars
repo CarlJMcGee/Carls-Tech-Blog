@@ -18,16 +18,16 @@
   {{! posts }}
   <div class="posts column columns is-full is-multiline">
     {{#each user.posts}}
-      <div class="post container column" data-post-id="{{id}}">
+      <a class="post container column is-full my-4" data-post-id="{{id}}">
         <div class="card columns is-multiline has-background-info">
           <div class="card-header column is-full has-background-primary-light">
-            <h3 class="title column" data-post-id="{{id}}">{{title}}</h3>
+            <h3 class="title is-size-4 column p-0" data-post-id="{{id}}">{{title}}</h3>
           </div>
           <div class="card-content column has-text-white">
             <p class="column" id="content">{{content}}</p>
           </div>
         </div>
-      </div>
+      </a>
     {{/each}}
   </div>
 

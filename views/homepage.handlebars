@@ -1,19 +1,23 @@
 <div class="container column columns is-multiline is-centered">
   {{#each post}}
-    <div
-      class="card column columns is-full is-multiline has-background-info my-3 has-text-white"
+    <a
+      href="/posts/{{id}}"
+      class="post card column columns is-full is-multiline has-background-info my-3 has-text-white"
+      data-post-id="{{id}}"
     >
       <div class="card-header columns is-multiline mb-0">
         <h3
           class="column card-title title is-full has-background-primary-light is-size-4 mb-4"
+          id="title"
+          data-post-id="{{id}}"
         >{{title}}</h3>
         <h3
           class="column subtitle has-background-primary-light is-full pt-0"
         >{{OP.username}}</h3>
       </div>
       <div class="card-content column is-full mt-0">
-        <p class="column is-full">{{content}}</p>
+        <p class="column is-full" id="content">{{content}}</p>
       </div>
-    </div>
+    </a>
   {{/each}}
 </div>
