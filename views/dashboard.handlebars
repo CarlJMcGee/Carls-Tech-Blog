@@ -16,15 +16,15 @@
   </div>
 
   {{! posts }}
-  <div class="column columns is-full is-multiline">
+  <div class="posts column columns is-full is-multiline">
     {{#each user.posts}}
-      <div class="container column">
+      <div class="post container column" data-post-id="{{id}}">
         <div class="card columns is-multiline has-background-info">
           <div class="card-header column is-full has-background-primary-light">
-            <h3 class="title column">{{title}}</h3>
+            <h3 class="title column" data-post-id="{{id}}">{{title}}</h3>
           </div>
           <div class="card-content column has-text-white">
-            <p class="column">{{content}}</p>
+            <p class="column" id="content">{{content}}</p>
           </div>
         </div>
       </div>
@@ -69,6 +69,49 @@
     </div>
     <button
       class="modal-close close-modal is-large"
+      aria-label="close"
+    ></button>
+  </div>
+</div>
+
+{{!-- Update Post Modal --}}
+  <div class="modal" id="edit-post-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit Post</p>
+        <button class="close-edit delete" aria-label="close"></button>
+      </header>
+
+      <form class="modal-card-body columns is-multiline" id="edit-post-form">
+        <input
+          type="text"
+          placeholder="Title"
+          class="column is-full my-3"
+          id="edit-post-title"
+        />
+        <textarea
+          name="edit-post-content"
+          id="edit-post-content"
+          cols="30"
+          rows="10"
+          class="column is-full my-3"
+          placeholder="Content Here..."
+        ></textarea>
+      </form>
+
+      <footer class="modal-card-foot columns is-multiline">
+        <button
+          type="submit"
+          form="edit-post-form"
+          class="button is-info column py-1"
+          id="edit-submit-btn"
+        >Update</button>
+        <button class="close-edit button column py-1">Cancel</button>
+      </footer>
+    </div>
+    <button
+      class="modal-close close-edit is-large"
       aria-label="close"
     ></button>
   </div>

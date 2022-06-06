@@ -58,7 +58,6 @@ router.get("/dashboard", async (req, res) => {
   });
   const profile = profileData.get({ plain: true });
 
-  console.log(profile);
   res.render("dashboard", {
     loggedIn: req.session.loggedIn,
     user: profile,
