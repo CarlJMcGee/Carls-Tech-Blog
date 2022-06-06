@@ -85,9 +85,32 @@ const editPost = function (e) {
   $(editPostModal).addClass("is-active");
 };
 
+// delete post
+const deletePost = async (e) => {
+  e.preventDefault();
+
+  console.log(`test`);
+
+  const postId = document.querySelector("#edit-post-title").dataset.postId;
+  try {
+    const deleteReq = await fetch(`/api/posts/find/${postId}`, {
+      method: "DELETE",
+    });
+
+    deleteReq.ok
+      ? document.location.reload()
+      : window.alert("Failed to delete post");
+  } catch (err) {
+    if (err) throw err;
+  }
+};
+
 // send post to server
 $("#new-post-form").submit(submitPost);
 $("#edit-post-form").submit(updatePost);
+
+// delete post
+$("#delete-post-btn").click(deletePost);
 
 // modal actions
 $("#new-post-btn").click(toggleModal(newPostModal));

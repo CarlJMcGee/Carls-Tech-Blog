@@ -62,6 +62,8 @@ router.get("/dashboard", async (req, res) => {
       attributes: {
         exclude: ["user_id"],
       },
+      separate: true,
+      order: [["createdAt", "DESC"]],
     },
   });
   const profile = profileData.get({ plain: true });
