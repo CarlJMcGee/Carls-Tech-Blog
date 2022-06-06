@@ -9,14 +9,6 @@ router.use("/dashboard", async (req, res, next) => {
   next();
 });
 
-router.use("/posts", async (req, res, next) => {
-  if (!req.session.loggedIn) {
-    res.redirect("/login");
-    return;
-  }
-  next();
-});
-
 router.get("/", async (req, res) => {
   const postData = await Post.findAll({
     include: [

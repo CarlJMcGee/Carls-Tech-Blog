@@ -3,6 +3,11 @@ const toggleModal = function (modal) {
   return function (e) {
     e.preventDefault;
 
+    if (!document.querySelector("#top").dataset.loggedIn) {
+      document.location.replace("/login");
+      return;
+    }
+
     if ($(modal).hasClass("is-active")) {
       $(modal).removeClass("is-active");
       return;
