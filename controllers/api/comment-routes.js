@@ -76,7 +76,11 @@ router.get("/post/:id", async (req, res) => {
 
 // post new comment
 router.post("/", async (req, res) => {
-  const newComment = await Comment.create(req.body);
+  const newComment = await Comment.create({
+    content: req.body.content,
+    post_id: req.body.post_id,
+    user_id: req.session.userId,
+  });
   const comment = await Comment.findOne({
     where: {
       content: req.body.content,

@@ -9,6 +9,14 @@ router.use("/dashboard", async (req, res, next) => {
   next();
 });
 
+router.use("/posts", async (req, res, next) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  next();
+});
+
 router.get("/", async (req, res) => {
   const postData = await Post.findAll({
     include: [
@@ -61,6 +69,67 @@ router.get("/dashboard", async (req, res) => {
   res.render("dashboard", {
     loggedIn: req.session.loggedIn,
     user: profile,
+  });
+});
+
+router.get("/posts/:id", async (req, res) => {
+  const postData = await Post.findByPk(req.params.id, {
+    attributes: {
+      exclude: ["user_id"],
+    },
+    include: [
+      {
+        model: User,
+        as: "OP",
+        attributes: {
+          exclude: ["password"],
+        },
+      },
+      {
+        model: Comment,
+        attributes: {
+          exclude: ["user_id", "post_id"],
+        },
+        include: {
+          model: User,
+          as: "commenter",
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        separate: true,
+        order: [["id", "DESC"]],
+      },
+    ],
+    order: [["createdAt", "DESC"]],
+  });
+  const post = postData.get({ plain: true });
+
+  post.createdAt = post.createdAt
+    .toDateString()
+    .split(" ")
+    .splice(1, 3)
+    .join(" ");
+
+  post.updatedAt = post.updatedAt
+    .toDateString()
+    .split(" ")
+    .splice(1, 3)
+    .join(" ");
+
+  post.comments.map((comment) => {
+    comment.createdAt = comment.createdAt
+      .toDateString()
+      .split(" ")
+      .splice(1, 3)
+      .join(" ");
+  });
+
+  console.log(post);
+
+  res.render("post-details", {
+    loggedIn: req.session.loggedIn,
+    post: post,
   });
 });
 

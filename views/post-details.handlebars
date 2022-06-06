@@ -1,0 +1,83 @@
+<div class="columns container is-multiline is-centered is-vcentered my-4">
+  {{! Post }}
+  <div class="column columns is-multiline has-text-right pr-5">
+    <h3
+      class="column title is-size-4 is-full mb-0"
+      id="post-title"
+      data-post-id="{{post.id}}"
+    >{{post.title}}</h3>
+
+    <h4 class="column subtitle is-full">{{post.OP.username}}</h4>
+
+    <h4
+      class="column pt-0"
+      id="timestamp"
+      data-created-at="{{post.createdAt}}"
+      data-updated-at="{{post.updatedAt}}"
+    >Posted on {{post.createdAt}}</h4>
+  </div>
+
+  <div
+    class="column columns is-four-fifths m-0 has-background-info has-text-white"
+  >
+    <p class="column is-size-5">{{post.content}}</p>
+  </div>
+
+  {{! Comments }}
+  <div class="column columns is-multiline is-full">
+    <h3 class="title">Comments
+      <a class="is-size-5" id="new-comment-btn">
+        ➕
+        <span>New Comment</span></a></h3>
+    {{#each post.comments}}
+      <div
+        class="column is-full card my-4 has-background-primary-dark has-text-white p-0"
+      >
+        <div class="card-content">
+          <h3 class="has-text-white">{{content}}</h3>
+        </div>
+        <div class="card-footer">
+          <h3
+            class="card-footer-item is-size-5 has-text-weight-semibold"
+          >{{commenter.username}}</h3>
+          <h3 class="card-footer-item">Posted on {{createdAt}}</h3>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+{{! New Post Modal }}
+<div class="modal" id="new-comment-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">New Comment</p>
+      <button class="close-modal delete" aria-label="close"></button>
+    </header>
+
+    <form class="modal-card-body columns is-multiline" id="new-comment-form">
+      <textarea
+        name="new-comment-content"
+        id="new-comment-content"
+        cols="30"
+        rows="10"
+        class="column is-full my-3"
+        placeholder="Content Here..."
+      ></textarea>
+    </form>
+
+    <footer class="modal-card-foot columns is-multiline">
+      <button
+        type="submit"
+        form="new-comment-form"
+        class="button is-info column py-1"
+        id="comment-submit-btn"
+      >Post</button>
+      <button class="close-modal button column py-1">Cancel</button>
+    </footer>
+  </div>
+  <button class="modal-close close-modal is-large" aria-label="close"></button>
+</div>
+
+<script src="\js\post-details.js"></script>
